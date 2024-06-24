@@ -1,4 +1,5 @@
 import discord
+import time
 import random
 from discord.ext import commands
 
@@ -6,6 +7,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 bot = commands.Bot(command_prefix='$', intents=intents)
+liste = ["taş","kağıt","makas"]
 
 @bot.event
 async def on_ready():
@@ -29,5 +31,41 @@ async def roll(ctx, dice: str):
 
     result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
     await ctx.send(result)
+@bot.command()
+async def joined(ctx, member: discord.Member):
+    """Says when a member joined."""
+    await ctx.send(f'{member.name} joined {discord.utils.format_dt(member.joined_at)}')
 
-bot.run("token")
+@bot.command()
+async def add(ctx, left: int, right: int):
+    """Adds two numbers together."""
+    await ctx.send(left + right)
+@bot.command()
+async def tkm(ctx, tkmdeger):
+    await ctx.send("3")
+    time.sleep(1)
+    await ctx.send("2")
+    time.sleep(1)
+    await ctx.send("1")
+    if tkmdeger == "taş" and random.choice(liste) == "taş":
+        await ctx.send("Rakibin taş dedi berabere")
+    elif tkmdeger == "taş" and random.choice(liste) == "kağıt":
+        await ctx.send("Rakibin kağıt dedi kaybettin")
+    elif tkmdeger == "taş" and random.choice(liste) == "makas":
+        await ctx.send("Rakibin makas dedi kazandın")
+    elif tkmdeger == "kağıt" and random.choice(liste) == "taş":
+        await ctx.send("Rakibin taş dedi kazandın")
+    elif tkmdeger == "kağıt" and random.choice(liste) == "kağıt":
+        await ctx.send("Rakibin kağıt dedi berabere")
+    elif tkmdeger == "kağıt" and random.choice(liste) == "makas":
+        await ctx.send("Rakibin makas dedi kaybettin")
+    elif tkmdeger == "makas" and random.choice(liste) == "taş":
+        await ctx.send("Rakibin taş dedi kaybettin")
+    elif tkmdeger == "makas" and random.choice(liste) == "kağıt":
+        await ctx.send("Rakibin kağıt dedi kazandın")
+    elif tkmdeger == "makas" and random.choice(liste) == "makas":
+        await ctx.send("Rakibin  dedi berabere")
+    else:
+        await ctx.send("taş kağıt veya makas demelisin")
+
+bot.run("")
