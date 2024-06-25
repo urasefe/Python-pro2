@@ -5,9 +5,29 @@ from discord.ext import commands
 
 intents = discord.Intents.default()
 intents.message_content = True
-
+tkmsonuc = ""
 bot = commands.Bot(command_prefix='$', intents=intents)
 liste = ["taş","kağıt","makas"]
+def tkmf(tkmarg):
+    global tkmsonuc
+    if tkmarg == "taş" and random.choice(liste) == "taş":
+        tkmsonuc = "Rakibin de taş dedi berabere"
+    elif tkmarg == "taş" and random.choice(liste) == "kağıt":
+        tkmsonuc = "Rakibin kağıt dedi kaybettin"
+    elif tkmarg == "taş" and random.choice(liste) == "makas":
+        tkmsonuc = "Rakibin makas dedi kazandın"
+    elif tkmarg == "kağıt" and random.choice(liste) == "taş":
+        tkmsonuc = "Rakibin taş dedi kazandın"
+    elif tkmarg == "kağıt" and random.choice(liste) == "kağıt":
+        tkmsonuc = "Rakibin kağıt dedi berabere"
+    elif tkmarg == "kağıt" and random.choice(liste) == "makas":
+        tkmsonuc = "Rakibin makas dedi kaybettin"
+    elif tkmarg == "makas" and random.choice(liste) == "taş":
+        tkmsonuc = "Rakibin taş dedi kaybettin"
+    elif tkmarg == "makas" and random.choice(liste) == "kağıt":
+        tkmsonuc = "Rakibin kağıt dedi kazandın"
+    elif tkmarg == "makas" and random.choice(liste) == "makas":
+        tkmsonuc = "Rakibin makas dedi berabere"
 
 @bot.event
 async def on_ready():
@@ -47,25 +67,7 @@ async def tkm(ctx, tkmdeger):
     await ctx.send("2")
     time.sleep(1)
     await ctx.send("1")
-    if tkmdeger == "taş" and random.choice(liste) == "taş":
-        await ctx.send("Rakibin taş dedi berabere")
-    elif tkmdeger == "taş" and random.choice(liste) == "kağıt":
-        await ctx.send("Rakibin kağıt dedi kaybettin")
-    elif tkmdeger == "taş" and random.choice(liste) == "makas":
-        await ctx.send("Rakibin makas dedi kazandın")
-    elif tkmdeger == "kağıt" and random.choice(liste) == "taş":
-        await ctx.send("Rakibin taş dedi kazandın")
-    elif tkmdeger == "kağıt" and random.choice(liste) == "kağıt":
-        await ctx.send("Rakibin kağıt dedi berabere")
-    elif tkmdeger == "kağıt" and random.choice(liste) == "makas":
-        await ctx.send("Rakibin makas dedi kaybettin")
-    elif tkmdeger == "makas" and random.choice(liste) == "taş":
-        await ctx.send("Rakibin taş dedi kaybettin")
-    elif tkmdeger == "makas" and random.choice(liste) == "kağıt":
-        await ctx.send("Rakibin kağıt dedi kazandın")
-    elif tkmdeger == "makas" and random.choice(liste) == "makas":
-        await ctx.send("Rakibin  dedi berabere")
-    else:
-        await ctx.send("taş kağıt veya makas demelisin")
-
-bot.run("")
+    tkmf(tkmdeger)
+    await ctx.send(tkmsonuc)
+    
+bot.run("TOKEN")
