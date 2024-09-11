@@ -105,7 +105,7 @@ async def duckhunt(ctx, sayibil):
         await ctx.send("yakalayamadın :(")
 @bot.command()
 async def duckscaught(ctx):
-    await ctx.send(len(ordeklist),"ördek yakaladın!")
+    await ctx.send(len(ordeklist))
 
 @bot.command()
 async def helpme(ctx):
